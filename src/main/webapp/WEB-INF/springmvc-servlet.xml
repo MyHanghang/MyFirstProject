@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- 配置@Controller注解扫描 -->
+    <context:component-scan base-package="com.zhihang.*"/>
+    <!-- 如果没有显示的配置处理器映射器和处理器适配那么springMvc会去默认的dispatcherServlet.properties中查找,
+    对应的处理器映射器和处理器适配器去使用,这样每个请求都要扫描一次他的默认配置文件,效率非常低,会降低访问速度,所以要显示的配置处理器映射器和
+    处理器适配器 -->
+
+    <!-- 注解形式的处理器映射器 -->
+    <!--         <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"></bean> -->
+    <!-- 注解形式的处理器适配器 -->
+    <!--         <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"></bean> -->
+
+    <!-- 配置最新版的注解的处理器映射器 -->
+    <!--         <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"></bean> -->
+    <!-- 配置最新版的注解的处理器适配器 -->
+    <!--         <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"></bean> -->
+
+    <!-- 注解驱动:
+        作用:替我们自动配置最新版的注解的处理器映射器和处理器适配器
+     -->
+    <mvc:annotation-driven>
+    </mvc:annotation-driven>
+
+    <!-- 配置视图解析器
+    作用:在controller中指定页面路径的时候就不用写页面的完整路径名称了,可以直接写页面去掉扩展名的名称
+    -->
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!-- 真正的页面路径 =  前缀 + 去掉后缀名的页面名称 + 后缀 -->
+        <!-- 前缀 -->
+        <property name="prefix" value="/WEB-INF/pages/">
+        </property>
+        <!-- 后缀 -->
+        <property name="suffix" value=".jsp">
+        </property>
+    </bean>
+</beans>
