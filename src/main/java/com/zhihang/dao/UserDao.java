@@ -36,4 +36,6 @@ public interface UserDao{
     public List<User> getUserByUserName(String userName);
 
     public void insertUser(User user);
+
+    public List<User> getAllUser();
 }

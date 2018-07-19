@@ -36,4 +36,12 @@ public class UserDaoImpl implements UserDao{
         sqlSession.insert("user.insertUser", user);
         sqlSession.close();
     }
+
+    @Override
+    public List<User> getAllUser(){
+        SqlSession sqlSession = SqlSessionFactoryUtils.getSqlSessionFactory().openSession();
+        List<User> list = sqlSession.selectList("user.getAllUser");
+        sqlSession.close();
+        return list;
+    }
 }
