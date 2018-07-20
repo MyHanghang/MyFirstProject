@@ -1,6 +1,6 @@
 package com.zhihang.dao.impl;
 
-import com.zhihang.dao.UserDao;
+import com.zhihang.mapper.UserMapper;
 import com.zhihang.pojo.User;
 import com.zhihang.utils.SqlSessionFactoryUtils;
 import org.apache.ibatis.session.SqlSession;
@@ -13,7 +13,7 @@ import java.util.List;
  * @author：xiaoHang
  * @create：2018-07-18 23:18
  **/
-public class UserDaoImpl implements UserDao{
+public class UserDaoImpl implements UserMapper{
     @Override
     public User getUserById(Integer id){
         SqlSession sqlSession = SqlSessionFactoryUtils.getSqlSessionFactory().openSession();

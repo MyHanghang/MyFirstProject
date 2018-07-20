@@ -1,9 +1,8 @@
 package com.zhihang.test;
 
-import com.zhihang.dao.UserDao;
 import com.zhihang.dao.impl.UserDaoImpl;
+import com.zhihang.mapper.UserMapper;
 import com.zhihang.pojo.User;
-import org.apache.ibatis.session.SqlSession;
 import org.junit.jupiter.api.Test;
 
 import java.util.Date;
@@ -16,28 +15,28 @@ import java.util.List;
 public class UserDaoTest{
     @Test
     public void testGetUserById(){
-        UserDao userDao = new UserDaoImpl();
-        User user = userDao.getUserById(37);
+        UserMapper userMapper = new UserDaoImpl();
+        User user = userMapper.getUserById(37);
         System.out.println(user);
     }
 
     @Test
     public void testGetUserByUserName(){
-        UserDao userDao = new UserDaoImpl();
-        List<User> list = userDao.getUserByUserName("罗");
+        UserMapper userMapper = new UserDaoImpl();
+        List<User> list = userMapper.getUserByUserName("罗");
         for (User user : list)
             System.out.println(user);
     }
 
     @Test
     public void testInsertUser(){
-        UserDao userDao = new UserDaoImpl();
+        UserMapper userMapper = new UserDaoImpl();
         User user = new User();
         user.setUsername("小航");
         user.setBirthday(new Date());
         user.setSex("男");
         user.setAddress("四川乐山的");
-        userDao.insertUser(user);
+        userMapper.insertUser(user);
         System.out.println(user);
     }
 }

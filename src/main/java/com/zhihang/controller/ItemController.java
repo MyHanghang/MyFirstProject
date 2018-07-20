@@ -8,7 +8,7 @@ package com.zhihang.controller;
  */
 
 
-import com.zhihang.dao.UserDao;
+import com.zhihang.mapper.UserMapper;
 import com.zhihang.dao.impl.UserDaoImpl;
 import com.zhihang.pojo.Item;
 import com.zhihang.pojo.User;
@@ -29,8 +29,8 @@ public class ItemController{
     @RequestMapping("userList")
     public ModelAndView userList(){
         ModelAndView mav = new ModelAndView();
-        UserDao userDao = new UserDaoImpl();
-        List<User> list = userDao.getAllUser();
+        UserMapper userMapper = new UserDaoImpl();
+        List<User> list = userMapper.getAllUser();
         mav.addObject("userList", list);
         mav.setViewName("userList");
         for (User user : list){

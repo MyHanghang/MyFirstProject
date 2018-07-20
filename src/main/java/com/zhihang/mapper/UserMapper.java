@@ -1,4 +1,4 @@
-package com.zhihang.dao;
+package com.zhihang.mapper;
 
 /*
  **********************************************
@@ -18,7 +18,7 @@ import java.util.List;
  * @author：xiaoHang
  * @create：2018-07-18 23:18
  **/
-public interface UserDao{
+public interface UserMapper{
     /**
      * 根据用户ID查询用户信息
      *
