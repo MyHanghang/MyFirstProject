@@ -8,7 +8,9 @@ package com.zhihang.mapper;
  */
 
 
+import com.zhihang.pojo.QueryVo;
 import com.zhihang.pojo.User;
+import org.w3c.dom.ls.LSException;
 
 import java.util.List;
 
@@ -35,7 +37,33 @@ public interface UserMapper{
      */
     public List<User> getUserByUserName(String userName);
 
+    /**
+     * 添加用户信息
+     *
+     * @param user
+     */
     public void insertUser(User user);
 
+    /**
+     * 获取所有用户信息
+     *
+     * @return
+     */
     public List<User> getAllUser();
+
+    /**
+     * 传递包装pojo
+     *
+     * @return
+     */
+    public List<User> getUserByQueryVo(QueryVo vo);
+
+    /**
+     * 获取用户总数
+     *
+     * @return
+     */
+    public Integer getUserCount();
+
+    public List<User> getUserByPojo(User user);
 }

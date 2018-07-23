@@ -7,22 +7,25 @@
     ${ }：是字符串拼接指令，如果入参为普通数据类型{ }内部只写value
     -->
 <mapper namespace="com.zhihang.mapper.UserMapper">
+    <sql id="user_sql">
+    `id`,
+	`username`,
+	`birthday`,
+	`sex`,
+	`address`
+    </sql>
     <!-- id:sql id,语句的唯一标识
         parameterType：入参的数据类型
         resultType：返回结果的数据类型
     -->
     <select id="getUserById" parameterType="int"
             resultType="uSEr">
-    SELECT
-	`id`,
-	`username`,
-	`birthday`,
-	`sex`,
-	`address`
-FROM
-	`user`
-WHERE
-	id =#{id};
+        SELECT
+        <include refid="user_sql"/>
+        FROM
+        `user`
+        WHERE
+        id =#{id};
     </select>
     <select id="getUserByUserName" parameterType="string"
             resultType="com.zhihang.pojo.User">
@@ -37,6 +40,19 @@ FROM
 WHERE
 	username LIKE '%${value}%';
 	</select>
+    <select id="getUserByQueryVo" parameterType="QueryVo"
+            resultType="com.zhihang.pojo.User">
+        SELECT
+        id,
+        username,
+        birthday,
+        sex,
+        address
+        FROM
+        USER
+        WHERE
+        username LIKE '%${user.username}%';
+    </select>
     <insert id="insertUser" parameterType="com.zhihang.pojo.User" useGeneratedKeys="true" keyProperty="id">
         <!--<selectKey keyProperty="id" resultType="int" order="AFTER">-->
         <!--SELECT LAST_INSERT_ID()-->
@@ -55,4 +71,28 @@ WHERE
         #{address}
         );
     </insert>
+    <select id="getUserCount" resultType="int">
+        SELECT COUNT(1) FROM `user`;
+    </select>
+
+    <select id="getUserByPojo" parameterType="user"
+            resultType="com.zhihang.pojo.User">
+        SELECT
+        id,
+        username,
+        birthday,
+        sex,
+        address
+        FROM
+        USER
+        <!-- <where>自动补上where关键字，同时处理多余and-->
+        <where>
+            <if test="username !=null and username != ''">
+                and username LIKE '%${username}%'
+            </if>
+            <if test="sex != null and sex != ''">
+                and sex = #{sex}
+            </if>
+        </where>
+    </select>
 </mapper>

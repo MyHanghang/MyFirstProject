@@ -1,6 +1,7 @@
 package com.zhihang.dao.impl;
 
 import com.zhihang.mapper.UserMapper;
+import com.zhihang.pojo.QueryVo;
 import com.zhihang.pojo.User;
 import com.zhihang.utils.SqlSessionFactoryUtils;
 import org.apache.ibatis.session.SqlSession;
@@ -43,5 +44,20 @@ public class UserDaoImpl implements UserMapper{
         List<User> list = sqlSession.selectList("user.getAllUser");
         sqlSession.close();
         return list;
+    }
+
+    @Override
+    public List<User> getUserByQueryVo(QueryVo vo){
+        return null;
+    }
+
+    @Override
+    public Integer getUserCount(){
+        return null;
+    }
+
+    @Override
+    public List<User> getUserByPojo(User user){
+        return null;
     }
 }
