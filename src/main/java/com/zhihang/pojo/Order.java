@@ -21,6 +21,16 @@ public class Order{
 
     private String note;
 
+    private User user;
+
+    public User getUser(){
+        return user;
+    }
+
+    public void setUser(User user){
+        this.user = user;
+    }
+
     public Integer getId(){
         return id;
     }
@@ -63,8 +73,7 @@ public class Order{
 
     @Override
     public String toString(){
-        return "Order [id=" + id + ", userId=" + userId + ", number=" +
-                number + ", createtime=" + createtime + ", note=" + note + "]";
+        return "Order{" + "id=" + id + ", userId=" + userId + ", number='" + number + '\'' + ", createtime=" +
+                createtime + ", note='" + note + '\'' + '}';
     }
-
 }

@@ -1,13 +1,14 @@
 package com.zhihang.test;
 
 import com.zhihang.mapper.UserMapper;
-import com.zhihang.dao.impl.UserDaoImpl;
+import com.zhihang.pojo.Order;
 import com.zhihang.pojo.QueryVo;
 import com.zhihang.pojo.User;
 import com.zhihang.utils.SqlSessionFactoryUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -87,5 +88,33 @@ public class UserMapperTest{
         List<User> list = userMapper.getUserByPojo(user);
         for (User user2 : list)
             System.out.println(user2);
+    }
+
+    @Test
+    public void testGetUserByIds(){
+        SqlSession sqlSession = SqlSessionFactoryUtils.getSqlSessionFactory().openSession();
+        //获取接口的代理人实现类
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+        QueryVo vo = new QueryVo();
+        vo.setIds(Arrays.asList(1, 10, 16, 25, 39));
+        List<User> list = userMapper.getUserByIds(vo);
+        for (User user2 : list){
+            System.out.println(user2);
+        }
+        sqlSession.close();
+    }
+
+    @Test
+    public void testGetUserOrderMap(){
+        SqlSession sqlSession = SqlSessionFactoryUtils.getSqlSessionFactory().openSession();
+        //获取接口的代理人实现类
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+        List<User> list = userMapper.getUserOrderMap();
+        for (User user2 : list){
+            System.out.println(user2);
+            for (Order order : user2.getOrders()){
+                System.out.println("此用户的订单为：" + order);
+            }
+        }
     }
 }

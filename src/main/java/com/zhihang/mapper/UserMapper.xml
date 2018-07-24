@@ -27,6 +27,24 @@
         WHERE
         id =#{id};
     </select>
+    <select id="getUserByIds" parameterType="QueryVo" resultType="user">
+        SELECT
+        <include refid="user_sql"/>
+        FROM
+        `user`
+        <where>
+            <!-- foreach循环标签
+            collection：要遍历的集合
+            open:循环开始之前要输出的内容
+            item：设置循环变量
+            separator：分隔符
+            close：循环结束之后输出的内容
+            -->
+            <foreach collection="ids" open="id IN(" item="uId" separator="," close=")">
+                #{uId}
+            </foreach>
+        </where>
+    </select>
     <select id="getUserByUserName" parameterType="string"
             resultType="com.zhihang.pojo.User">
 	SELECT
@@ -94,5 +112,40 @@ WHERE
                 and sex = #{sex}
             </if>
         </where>
+    </select>
+    <resultMap type="user" id="user_order_map">
+        <id property="id" column="id"/>
+        <result property="username" column="username"/>
+        <result property="birthday" column="birthday"/>
+        <result property="sex" column="sex"/>
+        <result property="address" column="address"/>
+        <result property="uuid2" column="uuid2"/>
+        <!-- association用于配置一对一关系
+             property：order里面的User属性
+             javaTupe：user的数据类型，支持别名
+         -->
+        <collection property="orders" ofType="com.zhihang.pojo.Order">
+            <id property="id" column="oid"/>
+            <!--<result property="userId" column="id"/>-->
+            <result property="number" column="number"/>
+            <result property="createtime" column="createtime"/>
+            <result property="note" column="note"/>
+        </collection>
+    </resultMap>
+    <select id="getUserOrderMap" resultMap="user_order_map">
+      SELECT
+	u.id,
+	u.username,
+	u.birthday,
+	u.sex,
+	u.address,
+	u.uuid2,
+	o.id oid,
+	o.number,
+	o.createtime,
+	o.note
+FROM
+	`user` u
+LEFT JOIN `order` o ON o.user_id = u.id;
     </select>
 </mapper>

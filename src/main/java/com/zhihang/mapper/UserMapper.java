@@ -66,4 +66,13 @@ public interface UserMapper{
     public Integer getUserCount();
 
     public List<User> getUserByPojo(User user);
+
+    public List<User> getUserByIds(QueryVo vo);
+
+    /**
+     * 演示一对多关联查询--resultMap
+     *
+     * @return
+     */
+    public List<User> getUserOrderMap();
 }

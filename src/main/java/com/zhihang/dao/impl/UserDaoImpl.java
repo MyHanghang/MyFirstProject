@@ -60,4 +60,14 @@ public class UserDaoImpl implements UserMapper{
     public List<User> getUserByPojo(User user){
         return null;
     }
+
+    @Override
+    public List<User> getUserByIds(QueryVo vo){
+        return null;
+    }
+
+    @Override
+    public List<User> getUserOrderMap(){
+        return null;
+    }
 }

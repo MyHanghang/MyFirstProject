@@ -8,6 +8,7 @@ package com.zhihang.pojo;
  */
 
 import java.util.Date;
+import java.util.List;
 
 public class User{
 
@@ -17,6 +18,16 @@ public class User{
     private Date birthday;// 生日
     private String address;// 地址
     private String uuid2;
+
+    public List<Order> orders;
+
+    public List<Order> getOrders(){
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders){
+        this.orders = orders;
+    }
 
     public String getUuid2(){
         return uuid2;
